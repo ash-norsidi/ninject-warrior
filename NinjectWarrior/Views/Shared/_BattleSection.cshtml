@@ -1,0 +1,79 @@
+@model NinjectWarrior.Models.Player
+@using NinjectWarrior.Models
+@inject NinjectWarrior.Repositories.IQuestRepository QuestRepository
+@inject Microsoft.AspNetCore.Mvc.Rendering.IJsonHelper Json
+
+<div id="battle-section-container">
+@{
+    var quest = !string.IsNullOrEmpty(Model.ActiveQuestId) ? QuestRepository.GetQuest(Model.ActiveQuestId) : null;
+    var enemyName = !string.IsNullOrEmpty(quest?.Battle) ? quest.Battle : quest?.Enemy;
+    if (string.IsNullOrEmpty(enemyName)) { enemyName = "Goblin"; }
+    var battleResult = ViewBag.BattleResult as NinjectWarrior.ViewModels.BattleResultViewModel;
+    var battleOver = ViewBag.BattleOver as bool? ?? false;
+}
+@if (battleOver)
+{
+    <input type="hidden" id="battle-over" value="true" />
+}
+
+@if (battleResult != null)
+{
+    @await Html.PartialAsync("_BattleResult", battleResult)
+}
+else
+{
+    <div class="terminal-window">
+        <p>> BATTLE START!</p>
+        <p>> You are fighting a @enemyName!</p>
+    </div>
+}
+
+<form id="attack-form" action="/Adventure/Attack" method="post">
+    <input type="hidden" name="enemyName" value="@enemyName" />
+    <label for="weaponType">Choose Weapon:</label>
+    <select name="weaponType">
+        <option value="1">Sword</option>
+        <option value="2">Axe</option>
+        <option value="3">Bow</option>
+        <option value="4">Magic</option>
+    </select>
+    <button type="submit" class="dice-button">
+        <img src="~/images/d20_button.png" alt="Roll to Attack!" />
+    </button>
+</form>
+
+<button id="equipment-toggle" class="dice-button">Equipment</button>
+<div id="equipment-section"
+     class="terminal-window hidden"
+     data-inventory="@Html.Raw(Json.Serialize(Model.Inventory.Items.OfType<NinjectWarrior.Models.Equipment>()))"
+     data-equipped-items="@Html.Raw(Json.Serialize(Model.EquippedItems))">
+    @using (Html.BeginForm("UpdateEquipment", "Adventure", FormMethod.Post, new { id = "equipment-form" }))
+    {
+        @Html.AntiForgeryToken()
+        <p>> ---------------- PLAYER STATS ----------------</p>
+        <div id="player-stats">
+            <p>> Strength: @Model.Strength (+@Model.StrengthBonus) <span id="str-diff"></span></p>
+            <p>> Defense: @Model.Defense (+@Model.DefenseBonus) <span id="def-diff"></span></p>
+            <p>> Evasion: @Model.Evasion (+@Model.EvasionBonus) <span id="eva-diff"></span></p>
+            <p>> Luck: @Model.Luck (+@Model.LuckBonus) <span id="lck-diff"></span></p>
+            <p>> Health: @Model.Health (+@Model.HealthBonus) <span id="hp-diff"></span></p>
+        </div>
+        <p>> ---------------- PLAYER EQUIPMENT ----------------</p>
+        var inventory = Model.Inventory.Items.OfType<NinjectWarrior.Models.Equipment>().Where(e => e.IsAcquired);
+        foreach (EquipmentSlot slot in Enum.GetValues(typeof(EquipmentSlot)))
+        {
+            <div class="form-group">
+                <label for="@slot">@slot:</label>
+                @Html.DropDownList(
+                    slot.ToString(),
+                    new SelectList(inventory.Where(i => i.Slot == slot), "Id", "Name", Model.EquippedItems.ContainsKey(slot) ? Model.EquippedItems[slot].Id : 0),
+                    "None",
+                    new { @class = "form-control equipment-dropdown", data_slot = slot.ToString() }
+                )
+            </div>
+        }
+        <p>> ----------------------------------------------------</p>
+        <button type="submit" class="btn btn-primary">Save Equipment</button>
+    }
+</div>
+</div>

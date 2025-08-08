@@ -7,57 +7,61 @@ namespace NinjectWarrior.Repositories
 	{
 		private readonly IEquipmentRepository _equipmentRepository = equipmentRepository;
 		private readonly IWebHostEnvironment _hostingEnvironment = hostingEnvironment; // Add this field
+		private Player? _player;
 
 		public Player GetPlayerById(int id)
 		{
-			// For demo, always return player with Id = 1
-			var player = new Player { Id = id, Name = "Hero", Level = 1, Health = 100, Weapon = WeaponType.Sword, Strength = 10, Defense = 5, Evasion = 5, Luck = 1, Experience = 0, ExperienceToNextLevel = 100 };
-
-			if (player != null)
+			if (_player == null)
 			{
-				player.Inventory = new Inventory();
-				var itemsPath = Path.Combine(_hostingEnvironment.ContentRootPath, "Data", "items.json");
-				var itemsJson = File.ReadAllText(itemsPath);
-				var items = JsonConvert.DeserializeObject<List<Item>>(itemsJson) ?? [];
-				foreach (var item in items)
+				// For demo, always return player with Id = 1
+				_player = new Player { Id = id, Name = "Hero", Level = 1, Health = 100, Weapon = WeaponType.Sword, Strength = 10, Defense = 5, Evasion = 5, Luck = 1, Experience = 0, ExperienceToNextLevel = 100 };
+
+				if (_player != null)
 				{
-					player.Inventory.AddItem(item);
+					_player.Inventory = new Inventory();
+					var itemsPath = Path.Combine(_hostingEnvironment.ContentRootPath, "Data", "items.json");
+					var itemsJson = File.ReadAllText(itemsPath);
+					var items = JsonConvert.DeserializeObject<List<Item>>(itemsJson) ?? [];
+					foreach (var item in items)
+					{
+						_player.Inventory.AddItem(item);
+					}
+
+					var equipmentPath = Path.Combine(_hostingEnvironment.ContentRootPath, "Data", "equipment.json");
+					var equipmentJson = File.ReadAllText(equipmentPath);
+					var equipment = JsonConvert.DeserializeObject<List<Equipment>>(equipmentJson) ?? [];
+					foreach (var item in equipment)
+					{
+						_player.Inventory.AddItem(item);
+					}
+
+					_player.EquippedItems = GetEquippedItems(_player.Id);
+					_player.CalculateBonuses();
 				}
-
-				var equipmentPath = Path.Combine(_hostingEnvironment.ContentRootPath, "Data", "equipment.json");
-				var equipmentJson = File.ReadAllText(equipmentPath);
-				var equipment = JsonConvert.DeserializeObject<List<Equipment>>(equipmentJson) ?? [];
-				foreach (var item in equipment)
+				else
 				{
-					player.Inventory.AddItem(item);
+					// For demo, return a default player if not found
+					_player = new Player
+					{
+						Id = id,
+						Name = "Hero",
+						Level = 1,
+						Health = 100,
+						Weapon = WeaponType.Sword,
+						Strength = 10,
+						Defense = 5,
+						Evasion = 5,
+						Luck = 1,
+						Experience = 0,
+						ExperienceToNextLevel = 100,
+						Inventory = new Inventory(),
+						EquippedItems = new Dictionary<EquipmentSlot, IEquipment>()
+					};
+					_player.CalculateBonuses();
 				}
-
-				player.EquippedItems = GetEquippedItems(player.Id);
-				player.CalculateBonuses();
-			}
-			else
-			{
-				// For demo, return a default player if not found
-				player = new Player
-				{
-					Id = id,
-					Name = "Hero",
-					Level = 1,
-					Health = 100,
-					Weapon = WeaponType.Sword,
-					Strength = 10,
-					Defense = 5,
-					Evasion = 5,
-					Luck = 1,
-					Experience = 0,
-					ExperienceToNextLevel = 100,
-					Inventory = new Inventory(),
-					EquippedItems = new Dictionary<EquipmentSlot, IEquipment>()
-				};
-				player.CalculateBonuses();
 			}
 
-			return player;
+			return _player;
 		}
 
 		private IDictionary<EquipmentSlot, IEquipment> GetEquippedItems(int playerId)

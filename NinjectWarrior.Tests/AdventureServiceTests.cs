@@ -47,7 +47,7 @@ namespace NinjectWarrior.Tests
             // Arrange
             var player = new Player { Id = 1, Health = 100, Name = "Hero" };
             var enemy = new Enemy { Name = "Goblin", Health = 0, ExperienceAwarded = 10 };
-            var battleOutcome = new BattleRoundResult { ResultMessage = "Win", DamageDealt = 10 };
+			var battleOutcome = new BattleRoundResult("Win", 10);
 
             _mockPlayerRepository.Setup(r => r.GetPlayerById(1)).Returns(player);
             _mockEnemyRepository.Setup(r => r.GetEnemyByName("Goblin")).Returns(enemy);

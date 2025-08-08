@@ -42,25 +42,7 @@
 }
 else if (Model.CurrentGameState == GameState.Battle)
 {
-    var quest = !string.IsNullOrEmpty(Model.ActiveQuestId) ? QuestRepository.GetQuest(Model.ActiveQuestId) : null;
-    var enemyName = !string.IsNullOrEmpty(quest?.Battle) ? quest.Battle : quest?.Enemy;
-    if (string.IsNullOrEmpty(enemyName)) { enemyName = "Goblin"; } // Fallback
-
-    <h3>Battle!</h3>
-    <p>You are fighting a @enemyName!</p>
-    <form action="/Adventure/Attack" method="post">
-        <input type="hidden" name="enemyName" value="@enemyName" />
-        <label for="weaponType">Choose Weapon:</label>
-        <select name="weaponType">
-            <option value="1">Sword</option>
-            <option value="2">Axe</option>
-            <option value="3">Bow</option>
-            <option value="4">Magic</option>
-        </select>
-        <button type="submit" class="dice-button">
-            <img src="~/images/d20_button.png" alt="Roll to Attack!" />
-        </button>
-    </form>
+    @await Html.PartialAsync("_BattleSection", Model)
 }
 else if (Model.CurrentGameState == GameState.Adventure)
 {

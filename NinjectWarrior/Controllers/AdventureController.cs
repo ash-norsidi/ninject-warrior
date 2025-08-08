@@ -35,7 +35,17 @@ namespace NinjectWarrior.Controllers
         public ActionResult Attack(string enemyName, int weaponType)
         {
             var result = _adventureService.PerformBattle(enemyName, (WeaponType)weaponType);
-            return View("BattleResult", result);
+            var player = _adventureService.GetCurrentPlayer();
+            ViewBag.BattleResult = result;
+            ViewBag.BattleOver = player.CurrentGameState != GameState.Battle;
+            return PartialView("_BattleSection", player);
+        }
+
+        [HttpGet]
+        public IActionResult BattleSection()
+        {
+            var player = _adventureService.GetCurrentPlayer();
+            return PartialView("_BattleSection", player);
         }
 
         // POST: /Adventure/ProcessQuestChoice
@@ -77,8 +87,11 @@ namespace NinjectWarrior.Controllers
 			}
 
 			_adventureService.UpdatePlayerEquipment(player.Id, equippedItems);
-
-			return RedirectToAction("Index");
+			if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+            {
+                return PartialView("_BattleSection", player);
+            }
+            return RedirectToAction("Index");
 		}
     }
 }

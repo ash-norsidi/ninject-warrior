@@ -11,11 +11,11 @@ var builder = WebApplication.CreateBuilder(args);
 //builder.Services.AddScoped<IGameLogger, ApiGameLogger>();
 
 // Repositories
-builder.Services.AddScoped<IPlayerRepository, PlayerRepository>();
-builder.Services.AddScoped<IEquipmentRepository, EquipmentRepository>();
-builder.Services.AddScoped<IEnemyRepository, EnemyRepository>();
-builder.Services.AddScoped<IPuzzleRepository, PuzzleRepository>();
-builder.Services.AddScoped<IQuestRepository, QuestRepository>();
+builder.Services.AddSingleton<IPlayerRepository, PlayerRepository>();
+builder.Services.AddSingleton<IEquipmentRepository, EquipmentRepository>();
+builder.Services.AddSingleton<IEnemyRepository, EnemyRepository>();
+builder.Services.AddSingleton<IPuzzleRepository, PuzzleRepository>();
+builder.Services.AddSingleton<IQuestRepository, QuestRepository>();
 
 // Services
 builder.Services.AddScoped<IDiceService, DiceService>();
@@ -44,7 +44,6 @@ if (!app.Environment.IsDevelopment())
 	app.UseExceptionHandler("/Adventure/Error");
 	app.UseHsts();
 }
-app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthorization();
@@ -52,4 +51,4 @@ app.MapControllerRoute(
 	name: "default",
 	pattern: "{controller=Adventure}/{action=Index}/{id?}");
 
-app.Run();
+app.Run();app.Run();

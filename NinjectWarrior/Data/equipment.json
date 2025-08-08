@@ -1,6 +1,6 @@
 [
   {
-    "Id": 100,
+    "Id": 1,
     "Name": "99+ Wooden Stick",
     "Description": "A smooth wooden stick that has been reinforced 99 times. Essential beginner weapon.",
     "Slot": "MainHand",
@@ -11,7 +11,7 @@
     "HealthBonus": 0
   },
   {
-    "Id": 101,
+    "Id": 2,
     "Name": "Iron Sword",
     "Description": "Forged in the Emberforge’s heart, this blade hums with raw might, cleaving through steel as easily as dawn shatters night.",
     "Slot": "MainHand",
@@ -23,7 +23,7 @@
     "IsAcquired": true
   },
   {
-    "Id": 102,
+    "Id": 3,
     "Name": "Wooden Shield",
     "Description": "Hewn from Verdant Vale’s ancient oaks, this shield stands steadfast, turning deadly strikes into harmless echoes.",
     "Slot": "OffHand",
@@ -35,7 +35,7 @@
     "IsAcquired": true
   },
   {
-    "Id": 201,
+    "Id": 4,
     "Name": "Leather Helmet",
     "Description": "Moon-tanned and desert-kissed, this helmet fits like a protective whisper, muffling incoming shards and stray blows.",
     "Slot": "Head",
@@ -47,7 +47,7 @@
     "IsAcquired": true
   },
   {
-    "Id": 301,
+    "Id": 5,
     "Name": "Leather Armor",
     "Description": "Woven from storm-serpent hide, this chestpiece shimmers with silver resilience, deflecting assaults while you move freely.",
     "Slot": "Chest",
@@ -59,7 +59,7 @@
     "IsAcquired": true
   },
   {
-    "Id": 401,
+    "Id": 6,
     "Name": "Leather Leggings",
     "Description": "Stitched from a serpentine hide, these leggings murmur with every step, cloaking your legs in stealthy durability.",
     "Slot": "Legs",
@@ -71,7 +71,7 @@
     "IsAcquired": true
   },
   {
-    "Id": 501,
+    "Id": 7,
     "Name": "Leather Boots",
     "Description": "Worn along endless pilgrim paths, these boots grant nimble grace to every step, carrying you safely through peril.",
     "Slot": "Feet",
@@ -83,7 +83,7 @@
     "IsAcquired": true
   },
   {
-    "Id": 601,
+    "Id": 8,
     "Name": "Ring of Luck",
     "Description": "Cast in midnight silver and crowned with a four-leaf crest, this ring bends fortune’s whim to your favor at every turn.",
     "Slot": "Accessory",
@@ -95,7 +95,7 @@
     "IsAcquired": true
   },
   {
-    "Id": 701,
+    "Id": 9,
     "Name": "Steel Axe",
     "Description": "Hewn from northern forges and tempered in glacier-water, this axe cleaves through shields like a thunderbolt.",
     "Slot": "MainHand",
@@ -107,7 +107,7 @@
     "IsAcquired": false
   },
   {
-    "Id": 702,
+    "Id": 10,
     "Name": "Mithril Dagger",
     "Description": "Fashioned of moonlit mithril, its blade dances with deadly grace, striking foes before they can draw breath.",
     "Slot": "MainHand",
@@ -119,7 +119,7 @@
     "IsAcquired": false
   },
   {
-    "Id": 703,
+    "Id": 11,
     "Name": "Crystal Staff",
     "Description": "Carved from the heart of a fallen star, this staff pulses with life, restoring vigor to the weary.",
     "Slot": "MainHand",
@@ -131,7 +131,7 @@
     "IsAcquired": false
   },
   {
-    "Id": 801,
+    "Id": 12,
     "Name": "Bronze Helm",
     "Description": "Cast from the first light of dawn, this helm rings out like a clarion against any incoming blow.",
     "Slot": "Head",
@@ -143,7 +143,7 @@
     "IsAcquired": false
   },
   {
-    "Id": 802,
+    "Id": 13,
     "Name": "Chainmail Armor",
     "Description": "Woven by master smiths, each interlocking ring shimmers with resilience, shrugging off the fiercest strikes.",
     "Slot": "Chest",
@@ -155,10 +155,10 @@
     "IsAcquired": false
   },
   {
-    "Id": 803,
+    "Id": 14,
     "Name": "Agile Gloves",
     "Description": "Sewn from wind-silk and blessed by a swift wind spirit, these gloves make every gesture a blur.",
-    "Slot": "Hands",
+    "Slot": "Accessory",
     "StrengthBonus": 0,
     "DefenseBonus": 0,
     "EvasionBonus": 2,
@@ -167,7 +167,7 @@
     "IsAcquired": true
   },
   {
-    "Id": 901,
+    "Id": 15,
     "Name": "Boots of Swiftness",
     "Description": "Imbued with the essence of a coursing river, these boots carry you faster than your own heartbeat.",
     "Slot": "Feet",
@@ -179,7 +179,7 @@
     "IsAcquired": false
   },
   {
-    "Id": 1001,
+    "Id": 16,
     "Name": "Amulet of Vitality",
     "Description": "Set with a vibrant emerald, this amulet hums with life’s pulse, mending wounds as if by nature’s grace.",
     "Slot": "Accessory",
