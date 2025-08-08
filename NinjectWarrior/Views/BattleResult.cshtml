@@ -1,0 +1,104 @@
+@model NinjectWarrior.ViewModels.BattleResultViewModel
+@{
+    ViewBag.Title = "Attack Result";
+    bool playerAttacks = Model.PlayerRoll % 2 != 0;
+    bool enemyAttacks = Model.EnemyRoll % 2 != 0;
+}
+
+<div class="terminal-window">
+    <p>> INITIATING BATTLE SEQUENCE...</p>
+    <p>> Player rolls: @Model.PlayerRoll | Enemy rolls: @Model.EnemyRoll</p>
+    <div class="battle-images">
+        <img src="~/Content/images/d20_@Model.PlayerRoll.png" alt="Player roll: @Model.PlayerRoll">
+        <img src="~/Content/images/d20_@Model.EnemyRoll.png" alt="Enemy roll: @Model.EnemyRoll">
+    </div>
+
+    @if (playerAttacks)
+    {
+        if (enemyAttacks) // Both attack
+        {
+            <p>> Both combatants charge!</p>
+            <div class="battle-images">
+                <img src="~/Content/images/attack.png" alt="Player attacks">
+                <img src="~/Content/images/attack.png" alt="Enemy attacks">
+            </div>
+        }
+        else // Player attacks, Enemy defends
+        {
+            <p>> Player attacks! Enemy defends.</p>
+            <div class="battle-images">
+                <img src="~/Content/images/attack.png" alt="Player attacks">
+                <img src="~/Content/images/defend.png" alt="Enemy defends">
+            </div>
+        }
+    }
+    else
+    {
+        if (enemyAttacks) // Player defends, Enemy attacks
+        {
+            <p>> Player defends. Enemy attacks!</p>
+            <div class="battle-images">
+                <img src="~/Content/images/defend.png" alt="Player defends">
+                <img src="~/Content/images/attack.png" alt="Enemy attacks">
+            </div>
+        }
+        else // Both defend
+        {
+            <p>> Both combatants take a defensive stance. A stalemate!</p>
+            <div class="battle-images">
+                <img src="~/Content/images/stalemate.png" alt="Stalemate">
+            </div>
+        }
+    }
+
+    <p>> ---------------- BATTLE LOG ----------------</p>
+    <p>> @Model.ResultMessage</p>
+    <p>> ----------------------------------------------</p>
+    <p>> PLAYER: @Model.Player.Name | HEALTH: @Model.Player.Health</p>
+    <p>> ENEMY: @Model.Enemy.Name | HEALTH: @Model.Enemy.Health</p>
+</div>
+
+<button id="equipment-toggle" class="dice-button">Equipment</button>
+
+<div id="equipment-section"
+     class="terminal-window hidden"
+     data-inventory="@Html.Raw(Json.Encode(Model.Player.Inventory.Items.OfType<NinjectWarrior.Models.Equipment>()))"
+     data-equipped-items="@Html.Raw(Json.Encode(Model.Player.EquippedItems))">
+    @using (Html.BeginForm("UpdateEquipment", "Adventure"))
+    {
+        @Html.AntiForgeryToken()
+        <p>> ---------------- PLAYER STATS ----------------</p>
+        <div id="player-stats">
+            <p>> Strength: @Model.Player.Strength (+@Model.Player.StrengthBonus) <span id="str-diff"></span></p>
+            <p>> Defense: @Model.Player.Defense (+@Model.Player.DefenseBonus) <span id="def-diff"></span></p>
+            <p>> Evasion: @Model.Player.Evasion (+@Model.Player.EvasionBonus) <span id="eva-diff"></span></p>
+            <p>> Luck: @Model.Player.Luck (+@Model.Player.LuckBonus) <span id="lck-diff"></span></p>
+            <p>> Health: @Model.Player.Health (+@Model.Player.HealthBonus) <span id="hp-diff"></span></p>
+        </div>
+        <p>> ---------------- PLAYER EQUIPMENT ----------------</p>
+
+        var inventory = Model.Player.Inventory.Items.OfType<NinjectWarrior.Models.Equipment>().Where(e => e.IsAcquired);
+
+        foreach (EquipmentSlot slot in Enum.GetValues(typeof(EquipmentSlot)))
+        {
+            <div class="form-group">
+                <label for="@slot">@slot:</label>
+                @Html.DropDownList(
+                    slot.ToString(),
+                    new SelectList(inventory.Where(i => i.Slot == slot), "Id", "Name", Model.Player.EquippedItems.ContainsKey(slot) ? Model.Player.EquippedItems[slot].Id : 0),
+                    "None",
+                    new { @class = "form-control equipment-dropdown", data_slot = slot.ToString() }
+                )
+            </div>
+        }
+
+        <p>> ----------------------------------------------------</p>
+        <button type="submit" class="btn btn-primary">Save Equipment</button>
+    }
+</div>
+
+<a href="@Url.Action("Index", "Adventure")">Back to Adventure</a>
+
+@section scripts {
+    <script src="~/Scripts/equipment.js"></script>
+}

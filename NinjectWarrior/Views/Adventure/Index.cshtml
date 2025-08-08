@@ -1,0 +1,101 @@
+@model NinjectWarrior.Models.Player
+@using NinjectWarrior.Models
+@inject NinjectWarrior.Services.IStoryService StoryService
+@inject NinjectWarrior.Repositories.IQuestRepository QuestRepository
+@inject NinjectWarrior.Repositories.IPuzzleRepository PuzzleRepository
+
+@{
+    ViewBag.Title = "Fuzzy Ninject Warrior Adventure";
+}
+
+<h2>Welcome, @Model.Name the Warrior!</h2>
+<p>Level: @Model.Level</p>
+<p>Health: @Model.Health</p>
+<p>Experience: @Model.Experience / @Model.ExperienceToNextLevel</p>
+<p>Gold: @Model.Gold</p>
+
+<hr />
+
+@if (Model.CurrentGameState == GameState.Puzzle)
+{
+    var puzzle = PuzzleRepository.GetPuzzle(Model.ActivePuzzleId);
+    if (puzzle != null)
+    {
+        <h3>Puzzle: @puzzle.Type</h3>
+        <p>@puzzle.Prompt</p>
+        <form action="/Adventure/SolvePuzzle" method="post">
+            <input type="text" name="solution" />
+            <button type="submit">Solve</button>
+        </form>
+        if (TempData["PuzzleMessage"] != null)
+        {
+            <p style="color: red;">@TempData["PuzzleMessage"]</p>
+        }
+        <h5>Hints:</h5>
+        <ul>
+            @foreach (var hint in puzzle.Hints)
+            {
+                <li>@hint</li>
+            }
+        </ul>
+    }
+}
+else if (Model.CurrentGameState == GameState.Battle)
+{
+    var quest = QuestRepository.GetQuest(Model.ActiveQuestId);
+    var enemyName = !string.IsNullOrEmpty(quest?.Battle) ? quest.Battle : quest?.Enemy;
+    if (string.IsNullOrEmpty(enemyName)) { enemyName = "Goblin"; } // Fallback
+
+    <h3>Battle!</h3>
+    <p>You are fighting a @enemyName!</p>
+    <form action="/Adventure/Attack" method="post">
+        <input type="hidden" name="enemyName" value="@enemyName" />
+        <label for="weaponType">Choose Weapon:</label>
+        <select name="weaponType">
+            <option value="1">Sword</option>
+            <option value="2">Axe</option>
+            <option value="3">Bow</option>
+            <option value="4">Magic</option>
+        </select>
+        <button type="submit" class="dice-button">
+            <img src="~/Content/images/d20_button.png" alt="Roll to Attack!" />
+        </button>
+    </form>
+}
+else if (Model.CurrentGameState == GameState.Adventure)
+{
+    var mainQuest = StoryService.GetCurrentMainQuest(Model);
+    if (mainQuest != null)
+    {
+        <h3>@mainQuest.Title</h3>
+        <p>@mainQuest.Script</p>
+
+        @if (Model.ActiveQuestId == mainQuest.Id)
+        {
+            <h4>Choices:</h4>
+            <form action="/Adventure/ProcessQuestChoice" method="post">
+                <input type="hidden" name="questId" value="@mainQuest.Id" />
+                @foreach (var choice in mainQuest.Choices)
+                {
+                    <button type="submit" name="choiceId" value="@choice.Key">@choice.Value</button>
+                }
+            </form>
+        }
+    }
+    else
+    {
+        <p>You have completed all the main quests!</p>
+    }
+
+    var subQuests = StoryService.GetAvailableSubQuests(Model);
+    if (subQuests.Any())
+    {
+        <h4>Available Sub-Quests:</h4>
+        <ul>
+            @foreach (var subQuest in subQuests)
+            {
+                <li>@subQuest.Title</li>
+            }
+        </ul>
+    }
+}
