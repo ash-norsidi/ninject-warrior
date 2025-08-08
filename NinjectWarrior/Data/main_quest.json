@@ -17,6 +17,10 @@
     "extra": {
       "companion": "Kaelin",
       "craftingOutcome": "Iron Sword → Thundercleaver (Strength +12)"
+    },
+    "factionImpact": {
+      "cityRogues": 0,
+      "emberforgedGuild": 0
     }
   },
   {
@@ -36,6 +40,10 @@
     "puzzleId": "catacomb_switches",
     "extra": {
       "craftingOutcome": "Unstable Embercore → Firebomb Flask (AoE Burn)"
+    },
+    "factionImpact": {
+      "cityRogues": 10,
+      "emberforgedGuild": -5
     }
   },
   {
@@ -53,7 +61,11 @@
     },
     "battle": "Frost-Maddened Wyrm",
     "puzzleId": "frozen_runestones",
-    "extra": null
+    "extra": null,
+    "factionImpact": {
+      "cityRogues": 0,
+      "emberforgedGuild": 0
+    }
   },
   {
     "Id": "4",
@@ -72,6 +84,10 @@
     "puzzleId": "council_sigil_grid",
     "extra": {
       "companion": "Council Spirit (temporary aid in battles)"
+    },
+    "factionImpact": {
+      "cityRogues": 0,
+      "emberforgedGuild": 0
     }
   },
   {
@@ -91,6 +107,10 @@
     "puzzleId": "final_alignment",
     "extra": {
       "endingVariant": "Determined by accumulated faction points"
+    },
+    "factionImpact": {
+      "cityRogues": 0,
+      "emberforgedGuild": 0
     }
   }
 ]

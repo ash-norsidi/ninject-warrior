@@ -46,6 +46,12 @@ namespace NinjectWarrior.Services
                 }
             }
 
+            if (quest.FactionImpact != null)
+            {
+                UpdateFactionReputation(player, Faction.EmberforgedGuild, quest.FactionImpact.EmberforgedGuild);
+                UpdateFactionReputation(player, Faction.CityRogues, quest.FactionImpact.CityRogues);
+            }
+
             player.CompletedQuestIds.Add(questId);
             player.ActiveQuestId = null;
 
@@ -83,6 +89,26 @@ namespace NinjectWarrior.Services
             else
             {
                 player.CurrentGameState = GameState.Adventure;
+            }
+        }
+
+        private void UpdateFactionReputation(Player player, Faction faction, int reputationChange)
+        {
+            if (reputationChange == 0) return;
+
+            var playerFaction = player.PlayerFactions.FirstOrDefault(f => f.Faction == faction);
+            if (playerFaction != null)
+            {
+                playerFaction.Reputation += reputationChange;
+            }
+            else
+            {
+                player.PlayerFactions.Add(new PlayerFaction
+                {
+                    PlayerId = player.Id,
+                    Faction = faction,
+                    Reputation = reputationChange
+                });
             }
         }
     }
