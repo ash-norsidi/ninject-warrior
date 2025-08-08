@@ -16,7 +16,7 @@ namespace NinjectWarrior.Repositories
 			if (player != null)
 			{
 				player.Inventory = new Inventory();
-				var itemsPath = Path.Combine(_hostingEnvironment.ContentRootPath, "App_Data", "items.json");
+				var itemsPath = Path.Combine(_hostingEnvironment.ContentRootPath, "Data", "items.json");
 				var itemsJson = File.ReadAllText(itemsPath);
 				var items = JsonConvert.DeserializeObject<List<Item>>(itemsJson) ?? [];
 				foreach (var item in items)
@@ -24,7 +24,7 @@ namespace NinjectWarrior.Repositories
 					player.Inventory.AddItem(item);
 				}
 
-				var equipmentPath = Path.Combine(_hostingEnvironment.ContentRootPath, "App_Data", "equipment.json");
+				var equipmentPath = Path.Combine(_hostingEnvironment.ContentRootPath, "Data", "equipment.json");
 				var equipmentJson = File.ReadAllText(equipmentPath);
 				var equipment = JsonConvert.DeserializeObject<List<Equipment>>(equipmentJson) ?? [];
 				foreach (var item in equipment)
@@ -62,7 +62,7 @@ namespace NinjectWarrior.Repositories
 
 		private IDictionary<EquipmentSlot, IEquipment> GetEquippedItems(int playerId)
 		{
-			var playerEquipmentPath = Path.Combine(_hostingEnvironment.ContentRootPath, "App_Data", "player_equipment.json");
+			var playerEquipmentPath = Path.Combine(_hostingEnvironment.ContentRootPath, "Data", "player_equipment.json");
 			var playerEquipmentJson = File.ReadAllText(playerEquipmentPath);
 			var playerEquipment = JsonConvert.DeserializeObject<List<PlayerEquipment>>(playerEquipmentJson) ?? [];
 
@@ -83,7 +83,7 @@ namespace NinjectWarrior.Repositories
 
 		public void UpdatePlayerEquipment(int playerId, IDictionary<EquipmentSlot, int> equippedItems)
 		{
-			var playerEquipmentPath = Path.Combine(_hostingEnvironment.ContentRootPath, "App_Data", "player_equipment.json");
+			var playerEquipmentPath = Path.Combine(_hostingEnvironment.ContentRootPath, "Data", "player_equipment.json");
 			var playerEquipmentJson = File.ReadAllText(playerEquipmentPath);
 			var playerEquipments = JsonConvert.DeserializeObject<List<PlayerEquipment>>(playerEquipmentJson) ?? new List<PlayerEquipment>();
 

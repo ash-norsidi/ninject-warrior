@@ -1,0 +1,101 @@
+[
+  {
+    "Id": "forgotten_statue_eyes",
+    "Type": "Riddle",
+    "Prompt": "In the center of the Ruined Hall stands a statue with hollow sockets. A plaque beneath reads: 'Only when the eyes see truth, shall the path open.' What should be placed in the sockets?",
+    "Solution": "Crystals",
+    "Hints": [
+      "Something clear",
+      "Associated with sight or focus",
+      "Common reward in ruins"
+    ],
+    "LinkedQuestId": "main_1"
+  },
+  {
+    "Id": "ember_vault_locks",
+    "Type": "Pattern",
+    "Prompt": "The Ember Vault door has rotating glyphs: 🔥🔥💨🔥🔥💨❓. What symbol completes the sequence?",
+    "Solution": "🔥",
+    "Hints": [
+      "Fire and air alternate",
+      "Fire dominates the pattern",
+      "Repeat and match the cycle"
+    ],
+    "LinkedQuestId": "main_2"
+  },
+  {
+    "Id": "rogue_trial_passcode",
+    "Type": "Cipher",
+    "Prompt": "A scroll reads: 'Khoor, frph iru zdubw!' (Hint: ROT3). Decode the message to pass the Rogue Trial.",
+    "Solution": "Hello, come for warpt!",
+    "Hints": [
+      "ROT3 Caesar cipher",
+      "Shift each letter",
+      "Classic substitution"
+    ],
+    "LinkedQuestId": "main_3"
+  },
+  {
+    "Id": "arcane_library_sequence",
+    "Type": "Logic",
+    "Prompt": "Three tomes lie before you: one glows blue, one red, and one green. Only one opens the portal. Clues say: The blue book lies. The green book says the red book is correct. The red book says the green book is lying. Which book is correct?",
+    "Solution": "Red",
+    "Hints": [
+      "Only one is telling the truth",
+      "Red accuses green",
+      "Green supports red"
+    ],
+    "LinkedQuestId": "main_4"
+  },
+  {
+    "Id": "mirror_of_truth",
+    "Type": "Combination",
+    "Prompt": "You stand before the Mirror of Truth. Around it are four items: 🗡️ (blade), 📜 (scroll), 💎 (gem), 🪞 (mirror). The inscription reads: 'Choose what reflects both self and secret.'",
+    "Solution": "🪞",
+    "Hints": [
+      "What shows you but isn’t you?",
+      "Literal and metaphorical reflection"
+    ],
+    "LinkedQuestId": "main_5"
+  },
+  {
+    "Id": "city_watch_roster",
+    "Type": "Logic",
+    "Prompt": "You find a coded guard roster:\n'Mondays are never guarded by someone who guards on Fridays. Saril and Jerek cannot guard on the same day. If Myla guards on Wednesday, who guards Tuesday?'",
+    "Solution": "Jerek",
+    "Hints": ["No same-day overlap", "Jerek can't be on same day as Saril", "Myla is fixed"],
+    "LinkedQuestId": "sub_4"
+  },
+  {
+    "Id": "frostbound_riddle",
+    "Type": "Riddle",
+    "Prompt": "Etched on the base of the shattered statue:\n'I dance in winter, though I do not move. My bite is silent, and death I prove.'\nWhat am I?",
+    "Solution": "Frost",
+    "Hints": ["Think of something cold", "It's present in ruins", "Common in Frostspire"],
+    "LinkedQuestId": "sub_3"
+  },
+  {
+    "Id": "ember_rune_sequence",
+    "Type": "Pattern",
+    "Prompt": "The mine wall reveals glowing runes: 🔺🔻🔺🔺🔻❓. What comes next?",
+    "Solution": "🔺",
+    "Hints": ["Count the shapes", "Follow triangle directions"],
+    "LinkedQuestId": "sub_5"
+  },
+  {
+    "Id": "bandit_scroll_cipher",
+    "Type": "Cipher",
+    "Prompt": "A scroll left by the Bandit Captain reads:\n'Zyl droo dsviv lu gsv kfg!'\n(Hint: Reverse alphabet)",
+    "Solution": "All good here on the past!",
+    "Hints": ["Caesar cipher?", "Reverse A-Z"],
+    "LinkedQuestId": "sub_2"
+  },
+  {
+    "Id": "forest_chest_combination",
+    "Type": "Combination",
+    "Prompt": "Inside a hidden forest alcove lies a chest with four symbols: 🌲🔥🌕💧. The nearby tree has bark carvings: 'What opposes what burns, yet feeds what grows?'",
+    "Solution": "💧",
+    "Hints": ["Fire’s opposite", "Needed by plants"],
+    "LinkedQuestId": "sub_1"
+  }
+]

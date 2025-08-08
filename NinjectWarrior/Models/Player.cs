@@ -6,11 +6,14 @@ namespace NinjectWarrior.Models
 {
     public class Player : ICombatant
     {
-        public Player()
-        {
-            CompletedQuestIds = new List<string>();
-            PlayerFactions = new List<PlayerFaction>();
-        }
+		public Player()
+		{
+			Name = string.Empty;
+			CompletedQuestIds = [];
+			PlayerFactions = [];
+			Inventory = null!; // Set to a non-null value in actual usage or via DI
+			EquippedItems = new Dictionary<EquipmentSlot, IEquipment>();
+		}
 
         [Key]
         public int Id { get; set; }
@@ -26,9 +29,9 @@ namespace NinjectWarrior.Models
         public int Gold { get; set; }
 
         public GameState CurrentGameState { get; set; }
-        public string CurrentMainQuestId { get; set; }
-        public string ActiveQuestId { get; set; }
-        public string ActivePuzzleId { get; set; }
+        public string? CurrentMainQuestId { get; set; }
+        public string? ActiveQuestId { get; set; }
+        public string? ActivePuzzleId { get; set; }
         public virtual ICollection<string> CompletedQuestIds { get; set; }
         public virtual ICollection<PlayerFaction> PlayerFactions { get; set; }
 

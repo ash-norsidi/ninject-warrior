@@ -1,0 +1,20 @@
+SQLite format 3
+
+-- This is a placeholder for the SQLite database.
+-- In a real project, this file would be generated and managed by your ORM (e.g., Entity Framework) or created via migrations/scripts.
+-- For demonstration, you may initialize your schema using a tool like DB Browser for SQLite or via code-first migrations.
+
+-- Example (not executable in this file):
+-- Players table
+CREATE TABLE Players (
+    Id INTEGER PRIMARY KEY,
+    Name TEXT NOT NULL,
+    Health INTEGER NOT NULL,
+    Weapon INTEGER NOT NULL
+);
+
+-- Enemies table
+CREATE TABLE Enemies (
+    Name TEXT PRIMARY KEY,
+    Health INTEGER NOT NULL
+);

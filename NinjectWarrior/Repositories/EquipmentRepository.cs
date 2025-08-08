@@ -1,31 +1,29 @@
-using NinjectWarrior.Models;
 using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Web.Hosting;
+using NinjectWarrior.Models;
 
 namespace NinjectWarrior.Repositories
 {
     public class EquipmentRepository : IEquipmentRepository
     {
         private readonly string _equipmentFilePath;
-        private List<Equipment> _equipment;
+        private readonly List<Equipment> _equipment;
 
-        public EquipmentRepository()
-        {
-            _equipmentFilePath = HostingEnvironment.MapPath("~/App_Data/equipment.json");
-            _equipment = JsonConvert.DeserializeObject<List<Equipment>>(File.ReadAllText(_equipmentFilePath));
-        }
+		public EquipmentRepository(IWebHostEnvironment webHostEnvironment)
+		{
+			_equipmentFilePath = Path.Combine(webHostEnvironment.ContentRootPath, "Data", "equipment.json");
+			var json = File.ReadAllText(_equipmentFilePath);
+			_equipment = JsonConvert.DeserializeObject<List<Equipment>>(json) ?? [];
+		}
 
         public IEnumerable<Equipment> GetAllEquipment()
         {
             return _equipment;
         }
 
-        public Equipment GetEquipmentById(int id)
-        {
-            return _equipment.FirstOrDefault(e => e.Id == id);
-        }
-    }
+		public Equipment GetEquipmentById(int id)
+		{
+			var equipment = _equipment.FirstOrDefault(e => e.Id == id);
+			return equipment ?? throw new InvalidOperationException($"Equipment with id {id} not found.");
+		}
+	}
 }

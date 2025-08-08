@@ -1,0 +1,112 @@
+[
+  {
+    "Name": "Ember Imp",
+    "Health": 40,
+    "Level": 3,
+    "Strength": 12,
+    "Defense": 5,
+    "Evasion": 6,
+    "Luck": 2,
+    "ExperienceAwarded": 20
+  },
+  {
+    "Name": "Lava Hound",
+    "Health": 55,
+    "Level": 4,
+    "Strength": 15,
+    "Defense": 7,
+    "Evasion": 2,
+    "Luck": 0,
+    "ExperienceAwarded": 30
+  },
+  {
+    "Name": "Frostback Hatchling",
+    "Health": 60,
+    "Level": 5,
+    "Strength": 17,
+    "Defense": 8,
+    "Evasion": 4,
+    "Luck": 1,
+    "ExperienceAwarded": 40
+  },
+  {
+    "Name": "Hollow Shade",
+    "Health": 50,
+    "Level": 6,
+    "Strength": 16,
+    "Defense": 4,
+    "Evasion": 8,
+    "Luck": 3,
+    "ExperienceAwarded": 45
+  },
+  {
+    "Name": "Cultist Raider",
+    "Health": 45,
+    "Level": 4,
+    "Strength": 13,
+    "Defense": 6,
+    "Evasion": 3,
+    "Luck": 1,
+    "ExperienceAwarded": 30
+  },
+  {
+    "Name": "Veil Gate Sentinel",
+    "Health": 90,
+    "Level": 8,
+    "Strength": 20,
+    "Defense": 14,
+    "Evasion": 5,
+    "Luck": 2,
+    "ExperienceAwarded": 100
+  },
+  {
+    "Name": "Ruined Keep Gate Warden",
+    "Health": 60,
+    "Level": 3,
+    "Strength": 18,
+    "Defense": 10,
+    "Evasion": 2,
+    "Luck": 0,
+    "ExperienceAwarded": 100
+  },
+  {
+    "Name": "Frostback Storm-Serpent",
+    "Health": 120,
+    "Level": 6,
+    "Strength": 22,
+    "Defense": 15,
+    "Evasion": 3,
+    "Luck": 1,
+    "ExperienceAwarded": 200
+  },
+  {
+    "Name": "Hollow Wraith",
+    "Health": 80,
+    "Level": 5,
+    "Strength": 20,
+    "Defense": 8,
+    "Evasion": 10,
+    "Luck": 5,
+    "ExperienceAwarded": 150
+  },
+  {
+    "Name": "Dawn Cultist High Priest",
+    "Health": 110,
+    "Level": 7,
+    "Strength": 18,
+    "Defense": 12,
+    "Evasion": 4,
+    "Luck": 2,
+    "ExperienceAwarded": 180
+  },
+  {
+    "Name": "Shadow Lord",
+    "Health": 200,
+    "Level": 10,
+    "Strength": 30,
+    "Defense": 20,
+    "Evasion": 10,
+    "Luck": 5,
+    "ExperienceAwarded": 500
+  }
+]

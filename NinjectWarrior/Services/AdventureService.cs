@@ -1,46 +1,29 @@
 using NinjectWarrior.Models;
 using NinjectWarrior.Repositories;
 using NinjectWarrior.ViewModels;
-using System.Collections.Generic;
-using NinjectWarrior.ApiClients;
 
 namespace NinjectWarrior.Services
 {
-    public class AdventureService : IAdventureService
+    public class AdventureService(
+		IPlayerRepository playerRepository,
+		IEnemyRepository enemyRepository,
+		IQuestRepository questRepository,
+		IPuzzleService puzzleService,
+		IBattleStrategyProcessor battleStrategyProcessor,
+		ILevelUpService levelUpService,
+		IStoryService storyService,
+		IDiceService diceService) : IAdventureService
     {
-        private readonly IPlayerRepository _playerRepository;
-        private readonly IEnemyRepository _enemyRepository;
-        private readonly IQuestRepository _questRepository;
-        private readonly IPuzzleService _puzzleService;
-        private readonly IBattleStrategyProcessor _battleStrategyProcessor;
-        private readonly ILevelUpService _levelUpService;
-        private readonly IStoryService _storyService;
-        private readonly IDiceService _diceService;
-        private readonly IGameLogger _gameLogger;
+        private readonly IPlayerRepository _playerRepository = playerRepository;
+        private readonly IEnemyRepository _enemyRepository = enemyRepository;
+        private readonly IQuestRepository _questRepository = questRepository;
+        private readonly IPuzzleService _puzzleService = puzzleService;
+        private readonly IBattleStrategyProcessor _battleStrategyProcessor = battleStrategyProcessor;
+        private readonly ILevelUpService _levelUpService = levelUpService;
+        private readonly IStoryService _storyService = storyService;
+        private readonly IDiceService _diceService = diceService;
 
-        public AdventureService(
-            IPlayerRepository playerRepository,
-            IEnemyRepository enemyRepository,
-            IQuestRepository questRepository,
-            IPuzzleService puzzleService,
-            IBattleStrategyProcessor battleStrategyProcessor,
-            ILevelUpService levelUpService,
-            IStoryService storyService,
-            IDiceService diceService,
-            IGameLogger gameLogger)
-        {
-            _playerRepository = playerRepository;
-            _enemyRepository = enemyRepository;
-            _questRepository = questRepository;
-            _puzzleService = puzzleService;
-            _battleStrategyProcessor = battleStrategyProcessor;
-            _levelUpService = levelUpService;
-            _storyService = storyService;
-            _diceService = diceService;
-            _gameLogger = gameLogger;
-        }
-
-        public Player GetCurrentPlayer()
+		public Player GetCurrentPlayer()
         {
             return _playerRepository.GetPlayerById(1);
         }
@@ -51,30 +34,34 @@ namespace NinjectWarrior.Services
             _storyService.ProcessQuestChoice(player, questId, choiceId);
         }
 
-        public bool SolvePuzzle(string solution)
-        {
-            var player = GetCurrentPlayer();
-            if (string.IsNullOrEmpty(player.ActivePuzzleId)) return false;
+		public bool SolvePuzzle(string solution)
+		{
+			var player = GetCurrentPlayer();
+			if (string.IsNullOrEmpty(player.ActivePuzzleId)) return false;
 
-            bool isCorrect = _puzzleService.CheckSolution(player.ActivePuzzleId, solution);
+			bool isCorrect = _puzzleService.CheckSolution(player.ActivePuzzleId, solution);
 
-            if (isCorrect)
-            {
-                var quest = _questRepository.GetQuest(player.ActiveQuestId);
-                player.ActivePuzzleId = null;
+			if (isCorrect)
+			{
+				Quest? quest = null;
+				if (!string.IsNullOrEmpty(player.ActiveQuestId))
+				{
+					quest = _questRepository.GetQuest(player.ActiveQuestId);
+				}
+				player.ActivePuzzleId = null;
 
-                if (!string.IsNullOrEmpty(quest?.Battle) || !string.IsNullOrEmpty(quest?.Enemy))
-                {
-                    player.CurrentGameState = GameState.Battle;
-                }
-                else
-                {
-                    player.CurrentGameState = GameState.Adventure;
-                }
-            }
+				if (!string.IsNullOrEmpty(quest?.Battle) || !string.IsNullOrEmpty(quest?.Enemy))
+				{
+					player.CurrentGameState = GameState.Battle;
+				}
+				else
+				{
+					player.CurrentGameState = GameState.Adventure;
+				}
+			}
 
-            return isCorrect;
-        }
+			return isCorrect;
+		}
 
         public BattleResultViewModel PerformBattle(string enemyName, WeaponType weaponType)
         {
@@ -112,8 +99,6 @@ namespace NinjectWarrior.Services
                 finalMessage += $" {enemy.Name} defeated {player.Name}!";
                 player.CurrentGameState = GameState.Adventure;
             }
-
-            _gameLogger.LogEvent(finalMessage);
 
             return new BattleResultViewModel
             {

@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Web.Hosting;
+using Microsoft.AspNetCore.Hosting;
 
 namespace NinjectWarrior.Repositories
 {
@@ -11,34 +11,34 @@ namespace NinjectWarrior.Repositories
     {
         private readonly Dictionary<string, Quest> _quests;
 
-        public QuestRepository()
-        {
-            var mainQuestsPath = HostingEnvironment.MapPath("~/App_Data/main_quest.json");
-            var subQuestsPath = HostingEnvironment.MapPath("~/App_Data/sub_quest.json");
+		public QuestRepository(IWebHostEnvironment webHostEnvironment)
+		{
+			var mainQuestsPath = Path.Combine(webHostEnvironment.ContentRootPath, "Data", "main_quest.json");
+			var subQuestsPath = Path.Combine(webHostEnvironment.ContentRootPath, "Data", "sub_quest.json");
 
-            var mainQuestsJson = File.ReadAllText(mainQuestsPath);
-            var subQuestsJson = File.ReadAllText(subQuestsPath);
+			var mainQuestsJson = File.ReadAllText(mainQuestsPath);
+			var subQuestsJson = File.ReadAllText(subQuestsPath);
 
-            var mainQuests = JsonConvert.DeserializeObject<List<Quest>>(mainQuestsJson);
-            var subQuests = JsonConvert.DeserializeObject<List<Quest>>(subQuestsJson);
+			var mainQuests = JsonConvert.DeserializeObject<List<Quest>>(mainQuestsJson) ?? [];
+			var subQuests = JsonConvert.DeserializeObject<List<Quest>>(subQuestsJson) ?? [];
 
-            foreach (var quest in mainQuests)
-            {
-                quest.QuestType = QuestType.Main;
-            }
+			foreach (var quest in mainQuests)
+			{
+				quest.QuestType = QuestType.Main;
+			}
 
-            foreach (var quest in subQuests)
-            {
-                quest.QuestType = QuestType.Sub;
-            }
+			foreach (var quest in subQuests)
+			{
+				quest.QuestType = QuestType.Sub;
+			}
 
-            _quests = mainQuests.Concat(subQuests).ToDictionary(q => q.Id, q => q);
-        }
+			_quests = mainQuests.Concat(subQuests).ToDictionary(q => q.Id, q => q);
+		}
 
-        public Quest GetQuest(string id)
-        {
-            return _quests.TryGetValue(id, out var quest) ? quest : null;
-        }
+		public Quest? GetQuest(string id)
+		{
+			return _quests.TryGetValue(id, out var quest) ? quest : null;
+		}
 
         public IEnumerable<Quest> GetQuests(QuestType type)
         {

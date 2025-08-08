@@ -1,4 +1,17 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿document.addEventListener('DOMContentLoaded', function () {
+    const equipmentToggle = document.getElementById('equipment-toggle');
+    const equipmentSection = document.getElementById('equipment-section');
 
-// Write your JavaScript code.
+    if (equipmentToggle && equipmentSection) {
+        equipmentToggle.addEventListener('click', function () {
+            const isHidden = equipmentSection.classList.contains('hidden');
+            if (isHidden) {
+                equipmentSection.classList.remove('hidden');
+                equipmentToggle.textContent = 'Close';
+            } else {
+                equipmentSection.classList.add('hidden');
+                equipmentToggle.textContent = 'Equipment';
+            }
+        });
+    }
+});

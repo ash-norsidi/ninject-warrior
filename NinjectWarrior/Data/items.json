@@ -1,0 +1,22 @@
+[
+  {
+    "Id": 1,
+    "Name": "Health Potion",
+    "Description": "Restores a small amount of health."
+  },
+  {
+    "Id": 2,
+    "Name": "Mana Potion",
+    "Description": "Restores a small amount of mana."
+  },
+  {
+    "Id": 3,
+    "Name": "Antidote",
+    "Description": "Cures poison."
+  },
+  {
+    "Id": 4,
+    "Name": "Smoke Bomb",
+    "Description": "Allows for a quick escape from battle."
+  }
+]

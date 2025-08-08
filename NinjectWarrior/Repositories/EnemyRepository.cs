@@ -10,7 +10,7 @@ namespace NinjectWarrior.Repositories
 		static EnemyRepository()
 		{
 			// Use AppDomain.CurrentDomain.BaseDirectory to resolve the path
-			var jsonPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data", "enemies.json");
+			var jsonPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "enemies.json");
 			var json = File.ReadAllText(jsonPath);
 			_enemies = JsonConvert.DeserializeObject<List<Enemy>>(json);
 		}

@@ -1,0 +1,11 @@
+{
+  "Id": "your_unique_id_here",
+  "Type": "Riddle | Logic | Pattern | Cipher | Combination",
+  "Prompt": "Player-facing description or question here",
+  "Solution": "correct_answer_here",
+  "Hints": [
+    "First hint here",
+    "Second hint here"
+  ],
+  "LinkedQuestId": "sub_#"
+}

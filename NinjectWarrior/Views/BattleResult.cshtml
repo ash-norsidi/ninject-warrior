@@ -1,4 +1,5 @@
 @model NinjectWarrior.ViewModels.BattleResultViewModel
+@inject Microsoft.AspNetCore.Mvc.Rendering.IJsonHelper Json
 @{
     ViewBag.Title = "Attack Result";
     bool playerAttacks = Model.PlayerRoll % 2 != 0;
@@ -9,8 +10,8 @@
     <p>> INITIATING BATTLE SEQUENCE...</p>
     <p>> Player rolls: @Model.PlayerRoll | Enemy rolls: @Model.EnemyRoll</p>
     <div class="battle-images">
-        <img src="~/Content/images/d20_@Model.PlayerRoll.png" alt="Player roll: @Model.PlayerRoll">
-        <img src="~/Content/images/d20_@Model.EnemyRoll.png" alt="Enemy roll: @Model.EnemyRoll">
+        <img src="~/images/d20_@(Model.PlayerRoll).png" alt="Player roll: @Model.PlayerRoll">
+        <img src="~/images/d20_@(Model.EnemyRoll).png" alt="Enemy roll: @Model.EnemyRoll">
     </div>
 
     @if (playerAttacks)
@@ -19,16 +20,16 @@
         {
             <p>> Both combatants charge!</p>
             <div class="battle-images">
-                <img src="~/Content/images/attack.png" alt="Player attacks">
-                <img src="~/Content/images/attack.png" alt="Enemy attacks">
+                <img src="~/images/attack.png" alt="Player attacks">
+                <img src="~/images/attack.png" alt="Enemy attacks">
             </div>
         }
         else // Player attacks, Enemy defends
         {
             <p>> Player attacks! Enemy defends.</p>
             <div class="battle-images">
-                <img src="~/Content/images/attack.png" alt="Player attacks">
-                <img src="~/Content/images/defend.png" alt="Enemy defends">
+                <img src="~/images/attack.png" alt="Player attacks">
+                <img src="~/images/defend.png" alt="Enemy defends">
             </div>
         }
     }
@@ -38,15 +39,15 @@
         {
             <p>> Player defends. Enemy attacks!</p>
             <div class="battle-images">
-                <img src="~/Content/images/defend.png" alt="Player defends">
-                <img src="~/Content/images/attack.png" alt="Enemy attacks">
+                <img src="~/images/defend.png" alt="Player defends">
+                <img src="~/images/attack.png" alt="Enemy attacks">
             </div>
         }
         else // Both defend
         {
             <p>> Both combatants take a defensive stance. A stalemate!</p>
             <div class="battle-images">
-                <img src="~/Content/images/stalemate.png" alt="Stalemate">
+                <img src="~/images/stalemate.png" alt="Stalemate">
             </div>
         }
     }
@@ -62,8 +63,8 @@
 
 <div id="equipment-section"
      class="terminal-window hidden"
-     data-inventory="@Html.Raw(Json.Encode(Model.Player.Inventory.Items.OfType<NinjectWarrior.Models.Equipment>()))"
-     data-equipped-items="@Html.Raw(Json.Encode(Model.Player.EquippedItems))">
+     data-inventory="@Html.Raw(Json.Serialize(Model.Player.Inventory.Items.OfType<NinjectWarrior.Models.Equipment>()))"
+     data-equipped-items="@Html.Raw(Json.Serialize(Model.Player.EquippedItems))">
     @using (Html.BeginForm("UpdateEquipment", "Adventure"))
     {
         @Html.AntiForgeryToken()
@@ -100,5 +101,5 @@
 <a href="@Url.Action("Index", "Adventure")">Back to Adventure</a>
 
 @section scripts {
-    <script src="~/Scripts/equipment.js"></script>
+    <script src="~/js/equipment.js"></script>
 }

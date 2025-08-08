@@ -1,20 +1,13 @@
 using NinjectWarrior.Models;
 using NinjectWarrior.Repositories;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace NinjectWarrior.Services
 {
-    public class StoryService : IStoryService
+    public class StoryService(IQuestRepository questRepository) : IStoryService
     {
-        private readonly IQuestRepository _questRepository;
+        private readonly IQuestRepository _questRepository = questRepository;
 
-        public StoryService(IQuestRepository questRepository)
-        {
-            _questRepository = questRepository;
-        }
-
-        public Quest GetCurrentMainQuest(Player player)
+		public Quest? GetCurrentMainQuest(Player player)
         {
             if (string.IsNullOrEmpty(player.CurrentMainQuestId))
             {
@@ -22,7 +15,7 @@ namespace NinjectWarrior.Services
                 if (firstQuest != null)
                 {
                     player.CurrentMainQuestId = firstQuest.Id;
-                    InitiateQuestSequence(player, firstQuest);
+					InitiateQuestSequence(player, firstQuest);
                     return firstQuest;
                 }
                 return null;
@@ -66,7 +59,7 @@ namespace NinjectWarrior.Services
                 if (nextQuest != null && nextQuest.QuestType == QuestType.Main)
                 {
                     player.CurrentMainQuestId = nextQuest.Id;
-                    InitiateQuestSequence(player, nextQuest);
+					InitiateQuestSequence(player, nextQuest);
                 }
                 else
                 {
@@ -75,7 +68,7 @@ namespace NinjectWarrior.Services
             }
         }
 
-        private void InitiateQuestSequence(Player player, Quest quest)
+        private static void InitiateQuestSequence(Player player, Quest quest)
         {
             player.ActiveQuestId = quest.Id;
             if (!string.IsNullOrEmpty(quest.PuzzleId))

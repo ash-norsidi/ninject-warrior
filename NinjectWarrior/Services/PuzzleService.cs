@@ -3,16 +3,11 @@ using System;
 
 namespace NinjectWarrior.Services
 {
-    public class PuzzleService : IPuzzleService
+    public class PuzzleService(IPuzzleRepository puzzleRepository) : IPuzzleService
     {
-        private readonly IPuzzleRepository _puzzleRepository;
+        private readonly IPuzzleRepository _puzzleRepository = puzzleRepository;
 
-        public PuzzleService(IPuzzleRepository puzzleRepository)
-        {
-            _puzzleRepository = puzzleRepository;
-        }
-
-        public bool CheckSolution(string puzzleId, string solution)
+		public bool CheckSolution(string puzzleId, string solution)
         {
             var puzzle = _puzzleRepository.GetPuzzle(puzzleId);
             if (puzzle == null)
