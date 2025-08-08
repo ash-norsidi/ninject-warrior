@@ -3,7 +3,7 @@
 @inject NinjectWarrior.Repositories.IQuestRepository QuestRepository
 @inject Microsoft.AspNetCore.Mvc.Rendering.IJsonHelper Json
 
-<div id="battle-section-container" class="terminal-window">
+<div id="battle-section-container">
 @{
     var quest = !string.IsNullOrEmpty(Model.ActiveQuestId) ? QuestRepository.GetQuest(Model.ActiveQuestId) : null;
     var enemyName = !string.IsNullOrEmpty(quest?.Battle) ? quest.Battle : quest?.Enemy;
@@ -15,12 +15,19 @@
 {
     <input type="hidden" id="battle-over" value="true" />
 }
-<h3>Battle!</h3>
-<p>You are fighting a @enemyName!</p>
+
 @if (battleResult != null)
 {
     @await Html.PartialAsync("_BattleResult", battleResult)
 }
+else
+{
+    <div class="terminal-window">
+        <p>> BATTLE START!</p>
+        <p>> You are fighting a @enemyName!</p>
+    </div>
+}
+
 <form id="attack-form" action="/Adventure/Attack" method="post">
     <input type="hidden" name="enemyName" value="@enemyName" />
     <label for="weaponType">Choose Weapon:</label>
@@ -69,9 +76,4 @@
         <button type="submit" class="btn btn-primary">Save Equipment</button>
     }
 </div>
-
-@section scripts {
-    <script src="~/js/equipment.js"></script>
-    <script src="~/js/battle.js"></script>
-}
 </div>

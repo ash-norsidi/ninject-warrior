@@ -16,9 +16,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 })
                 .then(r => r.text())
                 .then(html => {
-                    battleSection.innerHTML = html;
+                    battleSection.outerHTML = html;
                     // If battle is over, reload the page
-                    if (battleSection.querySelector('#battle-over')) {
+                    if (document.querySelector('#battle-over')) {
                         window.location.reload();
                         return;
                     }
@@ -40,8 +40,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 })
                 .then(r => r.text())
                 .then(html => {
-                    battleSection.innerHTML = html;
-                    if (battleSection.querySelector('#battle-over')) {
+                    battleSection.outerHTML = html;
+                    if (document.querySelector('#battle-over')) {
                         window.location.reload();
                         return;
                     }
