@@ -26,7 +26,7 @@ namespace NinjectWarrior.Models
 
     public class FactionImpact
     {
-        public int Rogue { get; set; }
-        public int Guild { get; set; }
+        public int CityRogues { get; set; }
+        public int EmberforgedGuild { get; set; }
     }
 }
