@@ -65,7 +65,7 @@ namespace NinjectWarrior.Services
                 if (nextQuest != null && nextQuest.QuestType == QuestType.Main)
                 {
                     player.CurrentMainQuestId = nextQuest.Id;
-					InitiateQuestSequence(player, nextQuest);
+					InitiateQuestSequence(player, quest);
                 }
                 else
                 {
