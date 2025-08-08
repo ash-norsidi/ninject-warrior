@@ -1,4 +1,4 @@
-# ninject-warrior
+# Ninject Warrior Adventure
 
 **ASP.NET Core MVC port for Ninject Warrior** (Co-developed with [Jules](https://jules.google.com/))
 
