@@ -28,19 +28,29 @@ else
     </div>
 }
 
-<form id="attack-form" action="/Adventure/Attack" method="post" class="terminal-window">
-    <input type="hidden" name="enemyName" value="@enemyName" />
-    <label for="weaponType">Choose Weapon:</label>
-    <select name="weaponType" class="terminal-window">
-        <option value="1">Sword</option>
-        <option value="2">Axe</option>
-        <option value="3">Bow</option>
-        <option value="4">Magic</option>
-    </select>
-    <button type="submit" class="dice-button">
-        <img src="~/images/d20_button.png" alt="Roll to Attack!" />
-    </button>
-</form>
+@if (battleOver)
+{
+    <div class="terminal-window">
+        <p>> The battle is over.</p>
+        <button onclick="window.location.href='@Url.Action("Index", "Adventure")'">Continue</button>
+    </div>
+}
+else
+{
+    <form id="attack-form" action="/Adventure/Attack" method="post" class="terminal-window">
+        <input type="hidden" name="enemyName" value="@enemyName" />
+        <label for="weaponType">Choose Weapon:</label>
+        <select name="weaponType" class="terminal-window">
+            <option value="1">Sword</option>
+            <option value="2">Axe</option>
+            <option value="3">Bow</option>
+            <option value="4">Magic</option>
+        </select>
+        <button type="submit" class="dice-button">
+            <img src="~/images/d20_button.png" alt="Roll to Attack!" />
+        </button>
+    </form>
+}
 
 <button id="equipment-toggle" class="dice-button">Equipment</button>
 <div id="equipment-section"
