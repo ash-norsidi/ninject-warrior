@@ -28,10 +28,10 @@ else
     </div>
 }
 
-<form id="attack-form" action="/Adventure/Attack" method="post">
+<form id="attack-form" action="/Adventure/Attack" method="post" class="terminal-window">
     <input type="hidden" name="enemyName" value="@enemyName" />
     <label for="weaponType">Choose Weapon:</label>
-    <select name="weaponType">
+    <select name="weaponType" class="terminal-window">
         <option value="1">Sword</option>
         <option value="2">Axe</option>
         <option value="3">Bow</option>
@@ -47,11 +47,11 @@ else
      class="terminal-window hidden"
      data-inventory="@Html.Raw(Json.Serialize(Model.Inventory.Items.OfType<NinjectWarrior.Models.Equipment>()))"
      data-equipped-items="@Html.Raw(Json.Serialize(Model.EquippedItems))">
-    @using (Html.BeginForm("UpdateEquipment", "Adventure", FormMethod.Post, new { id = "equipment-form" }))
+        @using (Html.BeginForm("UpdateEquipment", "Adventure", FormMethod.Post, new { id = "equipment-form", @class = "form-control custom-terminal-select" }))
     {
         @Html.AntiForgeryToken()
         <p>> ---------------- PLAYER STATS ----------------</p>
-        <div id="player-stats">
+        <div id="player-stats" class="terminal-window">
             <p>> Strength: @Model.Strength (+@Model.StrengthBonus) <span id="str-diff"></span></p>
             <p>> Defense: @Model.Defense (+@Model.DefenseBonus) <span id="def-diff"></span></p>
             <p>> Evasion: @Model.Evasion (+@Model.EvasionBonus) <span id="eva-diff"></span></p>
@@ -62,18 +62,18 @@ else
         var inventory = Model.Inventory.Items.OfType<NinjectWarrior.Models.Equipment>().Where(e => e.IsAcquired);
         foreach (EquipmentSlot slot in Enum.GetValues(typeof(EquipmentSlot)))
         {
-            <div class="form-group">
+            <div class="form-group terminal-window">
                 <label for="@slot">@slot:</label>
                 @Html.DropDownList(
                     slot.ToString(),
                     new SelectList(inventory.Where(i => i.Slot == slot), "Id", "Name", Model.EquippedItems.ContainsKey(slot) ? Model.EquippedItems[slot].Id : 0),
                     "None",
-                    new { @class = "form-control equipment-dropdown", data_slot = slot.ToString() }
+                        new { @class = "form-control equipment-dropdown custom-terminal-select", data_slot = slot.ToString() }
                 )
             </div>
         }
         <p>> ----------------------------------------------------</p>
-        <button type="submit" class="btn btn-primary">Save Equipment</button>
+        <button type="submit">Save Equipment</button>
     }
 </div>
 </div>

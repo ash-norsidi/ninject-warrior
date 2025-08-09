@@ -51,4 +51,4 @@ app.MapControllerRoute(
 	name: "default",
 	pattern: "{controller=Adventure}/{action=Index}/{id?}");
 
-app.Run();app.Run();
+app.Run();

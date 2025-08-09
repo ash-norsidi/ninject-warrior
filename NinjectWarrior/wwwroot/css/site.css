@@ -1,109 +1,135 @@
 body {
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #f5f5f5;
-    margin: 0;
-    padding: 30px;
+	font-family: Courier, monospace;
+	background-color: #000f;
+	color: antiquewhite;
+	margin: 0;
+	padding: 30px;
 }
 
 h2 {
-    color: #2c3e50;
+	color: antiquewhite;
 }
 
 form {
-    margin-top: 20px;
-    background: #fff;
-    padding: 10px 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px #ccc;
+	margin-top: 20px;
+	background: #fff;
+	padding: 10px 20px;
+	border-radius: 8px;
+	box-shadow: 0 2px 6px #ccc;
 }
 
 label {
-    margin-right: 10px;
+	margin-right: 10px;
 }
 
 button {
-    margin-left: 10px;
-    background: #27ae60;
-    color: #fff;
-    border: none;
-    padding: 6px 16px;
-    border-radius: 4px;
-    cursor: pointer;
+	margin-left: 10px;
+	background: content-box;
+	color: #fff;
+	border: 2px groove #0f0;
+	padding: 6px 16px;
+	border-radius: 4px;
+	cursor: pointer;
 }
 
-    button:hover {
-        background: #219150;
-    }
+	button:hover {
+		background: #219150;
+	}
 
 /* Retro Terminal Style */
 .terminal-window {
-    background-color: #000;
-    color: #0f0;
-    font-family: 'Courier New', Courier, monospace;
-    padding: 20px;
-    border: 2px solid #0f0;
-    border-radius: 5px;
-    margin-top: 30px;
+	background-color: #000;
+	color: #0f0;
+	font-family: 'Courier New', Courier, monospace;
+	padding: 20px;
+	border: 2px solid #0f0;
+	border-radius: 5px;
+	margin-top: 30px;
 }
 
-    .terminal-window p {
-        margin: 5px 0;
-        white-space: pre-wrap; /* To respect whitespace and newlines */
-    }
+	.terminal-window p {
+		margin: 5px 0;
+		white-space: pre-wrap; /* To respect whitespace and newlines */
+	}
 
-    .terminal-window .battle-images img {
-        width: 50px; /* Adjust size as needed */
-        height: 50px;
-        margin: 10px;
-        border: 1px solid #0f0;
-    }
+	.terminal-window .battle-images img {
+		width: 50px; /* Adjust size as needed */
+		height: 50px;
+		margin: 10px;
+		border: 1px solid #0f0;
+	}
+
+	.terminal-window select {
+		background: #000;
+		color: #0f0;
+		border: 1px solid #444;
+	}
 
 /* Dice Button Style */
 .dice-button {
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    margin-left: 20px;
+	background: none;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	margin-left: 20px;
 }
 
-    .dice-button img {
-        width: 80px; /* Adjust size as needed */
-        height: 80px;
-        transition: transform 0.2s ease-in-out;
-    }
+	.dice-button img {
+		width: 80px; /* Adjust size as needed */
+		height: 80px;
+		transition: transform 0.2s ease-in-out;
+	}
 
-    .dice-button:hover img {
-        transform: scale(1.1);
-    }
+	.dice-button:hover img {
+		transform: scale(1.1);
+	}
 
 #equipment-toggle {
-    margin-top: 20px;
-    background-color: #333;
-    color: #0f0;
-    border: 1px solid #0f0;
-    padding: 10px 20px;
-    cursor: pointer;
+	margin-top: 20px;
+	background-color: #000;
+	color: antiquewhite;
+	border: 1px solid #0f0;
+	padding: 10px 20px;
+	cursor: pointer;
 }
 
-    #equipment-toggle:hover {
-        background-color: #444;
-    }
+	#equipment-toggle:hover {
+		background-color: #219150;
+		color: #000;
+	}
 
 #equipment-section {
-    margin-top: 10px;
+	margin-top: 10px;
 }
 
 .hidden {
-    display: none;
+	display: none;
 }
 
 .stat-increase {
-    color: green;
-    font-weight: bold;
+	color: green;
+	font-weight: bold;
 }
 
 .stat-decrease {
-    color: red;
-    font-weight: bold;
+	color: red;
+	font-weight: bold;
 }
+
+.custom-terminal-select,
+.custom-terminal-select option,
+.custom-terminal-select:focus {
+	background: #000;
+	color: #0f0;
+	border: 1px solid #0f0;
+	font-family: 'Courier New', Courier, monospace;
+}
+
+	.custom-terminal-select:focus {
+		outline: 2px solid #0f0;
+	}
+
+	.custom-terminal-select option {
+		background: #000;
+		color: #0f0;
+	}
