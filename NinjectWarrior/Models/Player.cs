@@ -41,6 +41,8 @@ namespace NinjectWarrior.Models
         // Added for demo purposes
         public WeaponType Weapon { get; set; }
 
+        public Enemy? CurrentEnemy { get; set; }
+
         public int StrengthBonus { get; private set; }
         public int DefenseBonus { get; private set; }
         public int EvasionBonus { get; private set; }

@@ -24,6 +24,7 @@ namespace NinjectWarrior.Tests
             var quest = new Quest
             {
                 Id = questId,
+                QuestType = QuestType.Sub,
                 FactionImpact = new FactionImpact
                 {
                     EmberforgedGuild = 10,

@@ -1,0 +1,80 @@
+[
+  {
+    "Id": "sub_1",
+    "Title": "A Whisper in the Woods",
+    "Script": "You follow eerie whispers deep into the Emberpine Forest. A cloaked figure vanishes, leaving behind claw marks and a trail. Suddenly, shadows surge from the trees.",
+    "Enemy": "Forest Shade",
+    "Rewards": {
+      "Experience": 30,
+      "Gold": 20,
+      "Item": "Shadowleaf Cloak"
+    },
+    "FactionImpact": {
+      "Rogue": 5
+    },
+    "PuzzleId": "forest_chest_combination",
+    "Extra": null
+  },
+  {
+    "Id": "sub_2",
+    "Title": "Supply Run Sabotage",
+    "Script": "The Emberforged Guild's convoy was attacked en route to Vaeloria. They request your help to recover the lost supplies—rumors suggest bandit involvement.",
+    "Enemy": "Bandit Captain",
+    "Rewards": {
+      "Experience": 40,
+      "Gold": 35,
+      "Item": "Reinforced Ember Gear"
+    },
+    "FactionImpact": {
+      "Guild": 5
+    },
+    "PuzzleId": "bandit_scroll_cipher",
+    "Extra": "CraftingMaterial: Ember Core"
+  },
+  {
+    "Id": "sub_3",
+    "Title": "The Broken Statue",
+    "Script": "A villager near the Frostspire ruins found a shattered statue emitting a faint glow. When you inspect it, a frostbound spirit awakens in fury.",
+    "Enemy": "Frozen Guardian",
+    "Rewards": {
+      "Experience": 45,
+      "Gold": 25,
+      "Item": "Chillbone Ring"
+    },
+    "FactionImpact": null,
+    "PuzzleId": "frostbound_riddle",
+    "Extra": null
+  },
+  {
+    "Id": "sub_4",
+    "Title": "Dagger in the Dark",
+    "Script": "A merchant has been assassinated, and the City Rogues want answers before the Guard finds them guilty. Sneak into the Watchtower for clues, but beware—it’s guarded.",
+    "Enemy": "City Watch Captain",
+    "Rewards": {
+      "Experience": 35,
+      "Gold": 30,
+      "Item": "Silent Blade"
+    },
+    "FactionImpact": {
+      "Rogue": 10
+    },
+    "PuzzleId": "city_watch_roster",
+    "Extra": null
+  },
+  {
+    "Id": "sub_5",
+    "Title": "The Ember Mines' Echo",
+    "Script": "Old Emberforged mines have been collapsing, but miners report ghostly echoes and flickers in the dark. Investigate what lurks beneath the collapsed shaft.",
+    "Enemy": "Emberbound Wraith",
+    "Rewards": {
+      "Experience": 50,
+      "Gold": 40,
+      "Item": "Molten Vein Pendant"
+    },
+    "FactionImpact": {
+      "Guild": 7
+    },
+    "PuzzleId": "ember_rune_sequence",
+    "Extra": "Unlocks Crafting Station: Emberforge"
+  }
+]
