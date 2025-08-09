@@ -57,20 +57,47 @@ namespace NinjectWarrior.Services
 
             if (quest.QuestType == QuestType.Main)
             {
-                // Advance to the next main quest
-                var currentQuestIdNum = int.Parse(quest.Id);
-                var nextQuestId = (currentQuestIdNum + 1).ToString();
-                var nextQuest = _questRepository.GetQuest(nextQuestId);
-
-                if (nextQuest != null && nextQuest.QuestType == QuestType.Main)
+                var subQuest = GetAvailableSubQuests(player).FirstOrDefault();
+                if (subQuest != null)
                 {
-                    player.CurrentMainQuestId = nextQuest.Id;
-					InitiateQuestSequence(player, quest);
+                    InitiateQuestSequence(player, subQuest);
                 }
                 else
                 {
-                    player.CurrentMainQuestId = null; // Story finished
+                    AdvanceToNextMainQuest(player, quest.Id);
                 }
+            }
+            else // Sub-quest or other quest type
+            {
+                AdvanceToNextMainQuest(player, player.CurrentMainQuestId);
+            }
+        }
+
+        private void AdvanceToNextMainQuest(Player player, string? currentMainQuestId)
+        {
+            if (string.IsNullOrEmpty(currentMainQuestId))
+            {
+                player.CurrentMainQuestId = null;
+                return;
+            }
+
+            if (!int.TryParse(currentMainQuestId, out var currentQuestIdNum))
+            {
+                player.CurrentMainQuestId = null;
+                return;
+            }
+
+            var nextQuestId = (currentQuestIdNum + 1).ToString();
+            var nextQuest = _questRepository.GetQuest(nextQuestId);
+
+            if (nextQuest != null && nextQuest.QuestType == QuestType.Main)
+            {
+                player.CurrentMainQuestId = nextQuest.Id;
+                InitiateQuestSequence(player, nextQuest);
+            }
+            else
+            {
+                player.CurrentMainQuestId = null; // Story finished
             }
         }
 
