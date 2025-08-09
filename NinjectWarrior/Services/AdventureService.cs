@@ -68,8 +68,12 @@ namespace NinjectWarrior.Services
             var player = GetCurrentPlayer();
             player.Weapon = weaponType;
 
-            var enemy = _enemyRepository.GetEnemyByName(enemyName);
-			enemy ??= new Enemy { Name = "Default Goblin", Health = 20, ExperienceAwarded = 5 };
+            if (player.CurrentEnemy == null || player.CurrentEnemy.Name != enemyName)
+            {
+                player.CurrentEnemy = _enemyRepository.GetEnemyByName(enemyName);
+            }
+
+            var enemy = player.CurrentEnemy;
 
             var (playerRoll, enemyRoll) = RollForCombatants(player, enemy);
             var battleOutcome = _battleStrategyProcessor.Resolve(player, playerRoll, enemy, enemyRoll);
@@ -79,6 +83,7 @@ namespace NinjectWarrior.Services
             {
                 finalMessage += $" {player.Name} defeated {enemy.Name}!";
                 GrantExperience(player, enemy);
+                player.CurrentEnemy = null; // Clear the enemy after battle
 
                 // If battle was part of a quest, return to adventure to see choices
                 if (!string.IsNullOrEmpty(player.ActiveQuestId))
@@ -94,6 +99,7 @@ namespace NinjectWarrior.Services
             else if (player.Health <= 0)
             {
                 finalMessage += $" {enemy.Name} defeated {player.Name}!";
+                player.CurrentEnemy = null; // Clear the enemy after battle
                 player.CurrentGameState = GameState.Adventure;
             }
 

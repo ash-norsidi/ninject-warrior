@@ -1,0 +1,116 @@
+[
+  {
+    "Id": "1",
+    "title": "Embers of Resurrection",
+    "script": "You awaken among the ashen ruins of Emberforge, the city's legendary flame long extinguished. A voice crackles through the smoke — 'If the heart of Emberforge burns again, hope may return.' Your path begins here.",
+    "choices": {
+      "1": "Emberforged Guild: Masters of flame-forged weaponry. Helping them grants access to advanced axe and sword upgrade blueprints.",
+      "2": "City Rogues: A streetwise network in Vaeloria City. Earn their trust through under-the-radar errands for stealth gear and unique “Silent Steps” boots enhancements."
+    },
+    "rewards": {
+      "experience": 1200,
+      "gold": 300,
+      "items": ["Thundercleaver Blueprint"]
+    },
+    "battle": "Ruined Keep Gate Warden",
+    "puzzleId": "ember_conduits",
+    "extra": {
+      "companion": "Kaelin",
+      "craftingOutcome": "Iron Sword → Thundercleaver (Strength +12)"
+    },
+    "factionImpact": {
+      "cityRogues": 0,
+      "emberforgedGuild": 0
+    }
+  },
+  {
+    "Id": "2",
+    "title": "Whispers Beneath Vaeloria",
+    "script": "A spy named Vex slips you a scroll before vanishing into the alley shadows. 'Meet me beneath the city. Secrets wait where the sun never touches.' In the catacombs, choices must be made in silence.",
+    "choices": {
+      "1": "City Rogues: Prove your worth by navigating the underground and retrieving blackmail ledgers from the corrupt elite.",
+      "2": "Emberforged Guild: Purge the tunnels of unstable relics threatening the city's foundations."
+    },
+    "rewards": {
+      "experience": 1600,
+      "gold": 200,
+      "items": ["Shadow Ledger", "Unstable Embercore"]
+    },
+    "battle": "Underground Flame-Touched Brute",
+    "puzzleId": "catacomb_switches",
+    "extra": {
+      "craftingOutcome": "Unstable Embercore → Firebomb Flask (AoE Burn)"
+    },
+    "factionImpact": {
+      "cityRogues": 10,
+      "emberforgedGuild": -5
+    }
+  },
+  {
+    "Id": "3",
+    "title": "The Ironhowl Convergence",
+    "script": "Far to the north, the Ironhowl Mountains rumble. You and your chosen faction must halt a growing rift that tears reality. Faction scouts await your command at Frostmaw Outpost.",
+    "choices": {
+      "1": "Emberforged Guild: Construct a runic forge in the cold wastes to seal the rift and unlock Elemental Weapon Augments.",
+      "2": "City Rogues: Sabotage the enemy’s frost spire and extract magical blueprints for stealth-based survival gear."
+    },
+    "rewards": {
+      "experience": 2000,
+      "gold": 500,
+      "items": ["Runic Alloy", "Frostcloak Schematic"]
+    },
+    "battle": "Frost-Maddened Wyrm",
+    "puzzleId": "frozen_runestones",
+    "extra": null,
+    "factionImpact": {
+      "cityRogues": 0,
+      "emberforgedGuild": 0
+    }
+  },
+  {
+    "Id": "4",
+    "title": "Ashes of the Council",
+    "script": "Vaeloria’s High Council lies in ruins after a mysterious explosion. You're summoned by both factions to uncover the truth — but only one will help you reach the real culprit.",
+    "choices": {
+      "1": "City Rogues: Infiltrate the council chamber ruins and decode secret archives.",
+      "2": "Emberforged Guild: Hunt down the traitor smith rumored to have forged the bomb."
+    },
+    "rewards": {
+      "experience": 2500,
+      "gold": 700,
+      "items": ["Council Sigil", "Silent Flame Tonic"]
+    },
+    "battle": "Crimson Forgelord",
+    "puzzleId": "council_sigil_grid",
+    "extra": {
+      "companion": "Council Spirit (temporary aid in battles)"
+    },
+    "factionImpact": {
+      "cityRogues": 0,
+      "emberforgedGuild": 0
+    }
+  },
+  {
+    "Id": "5",
+    "title": "Heartsplitter",
+    "script": "With faction alignment at its peak, the final path opens. The entity behind Vaeloria’s decay rises from the Emberforge’s deepest chamber — and it knows your every decision. What you forged will now be tested.",
+    "choices": {
+      "1": "Final allegiance to Emberforged Guild — wield brute strength and battle-ready companions.",
+      "2": "Final allegiance to City Rogues — employ misdirection, speed, and lethal precision."
+    },
+    "rewards": {
+      "experience": 5000,
+      "gold": 1200,
+      "items": ["Faction Relic", "Heartsplitter Core"]
+    },
+    "battle": "The Echoed Flame (Final Boss)",
+    "puzzleId": "final_alignment",
+    "extra": {
+      "endingVariant": "Determined by accumulated faction points"
+    },
+    "factionImpact": {
+      "cityRogues": 0,
+      "emberforgedGuild": 0
+    }
+  }
+]
