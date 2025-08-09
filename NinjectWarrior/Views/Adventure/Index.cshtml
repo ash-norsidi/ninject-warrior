@@ -22,27 +22,31 @@
     if (puzzle != null)
     {
         <h3>Puzzle: @puzzle.Type</h3>
-        <p>@puzzle.Prompt</p>
-        <form action="/Adventure/SolvePuzzle" method="post">
+        <p>@puzzle.Prompt</p>   
+        <form action="/Adventure/SolvePuzzle" method="post" class="terminal-window" style="display: flex; align-items: center; gap: 8px;">
             <input type="text" name="solution" />
             <button type="submit">Solve</button>
-        </form>
-        if (TempData["PuzzleMessage"] != null)
-        {
-            <p style="color: red;">@TempData["PuzzleMessage"]</p>
-        }
-        <h5>Hints:</h5>
-        <ul>
-            @foreach (var hint in puzzle.Hints)
+            @if (TempData["PuzzleMessage"] != null)
             {
-                <li>@hint</li>
+                <span style="color: red; margin-left: 8px;">@TempData["PuzzleMessage"]</span>
             }
-        </ul>
+        </form>
+        <div class="terminal-window">
+            <h5>Hints:</h5>
+            <ul>
+                @foreach (var hint in puzzle.Hints)
+                {
+                    <li>@hint</li>
+                }
+            </ul>
+        </div>        
     }
 }
 else if (Model.CurrentGameState == GameState.Battle)
 {
-    @await Html.PartialAsync("_BattleSection", Model)
+    <div id="battle-section-container">
+        @await Html.PartialAsync("_BattleSection", Model)
+    </div>
 }
 else if (Model.CurrentGameState == GameState.Adventure)
 {
@@ -55,7 +59,7 @@ else if (Model.CurrentGameState == GameState.Adventure)
         @if (Model.ActiveQuestId == mainQuest.Id)
         {
             <h4>Choices:</h4>
-            <form action="/Adventure/ProcessQuestChoice" method="post">
+            <form action="/Adventure/ProcessQuestChoice" method="post" class="terminal-window">
                 <input type="hidden" name="questId" value="@mainQuest.Id" />
                 @foreach (var choice in mainQuest.Choices)
                 {
@@ -68,16 +72,19 @@ else if (Model.CurrentGameState == GameState.Adventure)
     {
         <p>You have completed all the main quests!</p>
     }
-
     var subQuests = StoryService.GetAvailableSubQuests(Model);
     if (subQuests.Any())
     {
-        <h4>Available Sub-Quests:</h4>
-        <ul>
-            @foreach (var subQuest in subQuests)
-            {
-                <li>@subQuest.Title</li>
-            }
-        </ul>
+        <div class="terminal-window">
+            <h3>Available Sub-Quests</h3>
+            <p>These quests can be completed to gain additional experience and gold.</p>
+            <h4>Available Sub-Quests:</h4>
+            <ul>
+                @foreach (var subQuest in subQuests)
+                {
+                    <li>@subQuest.Title</li>
+                }
+            </ul>
+        </div>
     }
 }

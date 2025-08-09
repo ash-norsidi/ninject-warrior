@@ -1,7 +1,7 @@
 @model NinjectWarrior.ViewModels.BattleResultViewModel
 @inject Microsoft.AspNetCore.Mvc.Rendering.IJsonHelper Json
 @{
-    ViewBag.Title = "Attack Result";
+    ViewBag.Title = "Battle Result";
     bool playerAttacks = Model.PlayerRoll % 2 != 0;
     bool enemyAttacks = Model.EnemyRoll % 2 != 0;
 }

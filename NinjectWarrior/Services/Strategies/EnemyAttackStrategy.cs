@@ -18,7 +18,7 @@ namespace NinjectWarrior.Services.Strategies
             return new BattleRoundResult(resultMsg, damage);
         }
 
-        private int CalculateDamage(Enemy attacker, int attackerRoll, Player defender, int defenderRoll)
+        private static int CalculateDamage(Enemy attacker, int attackerRoll, Player defender, int defenderRoll)
         {
             int baseDamage = attacker.Strength;
             int totalDefense = defender.Defense + defender.DefenseBonus + defenderRoll;

@@ -15,7 +15,7 @@ namespace NinjectWarrior.Repositories
 			_enemies = JsonConvert.DeserializeObject<List<Enemy>>(json);
 		}
 
-		public Enemy? GetEnemyByName(string name)
+		public Enemy GetEnemyByName(string name)
 		{
 			// Return a copy to prevent modifying the cached list
 			var enemy = (_enemies ?? Enumerable.Empty<Enemy>()).FirstOrDefault(e => e.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
@@ -34,7 +34,7 @@ namespace NinjectWarrior.Repositories
 					ExperienceAwarded = enemy.ExperienceAwarded
 				};
 			}
-			return null;
+			throw new InvalidOperationException($"Enemy with name '{name}' not found.");
 		}
 	}
 }

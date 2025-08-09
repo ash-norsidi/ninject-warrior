@@ -69,10 +69,7 @@ namespace NinjectWarrior.Services
             player.Weapon = weaponType;
 
             var enemy = _enemyRepository.GetEnemyByName(enemyName);
-            if (enemy == null)
-            {
-                enemy = new Enemy { Name = "Default Goblin", Health = 20, ExperienceAwarded = 5 };
-            }
+			enemy ??= new Enemy { Name = "Default Goblin", Health = 20, ExperienceAwarded = 5 };
 
             var (playerRoll, enemyRoll) = RollForCombatants(player, enemy);
             var battleOutcome = _battleStrategyProcessor.Resolve(player, playerRoll, enemy, enemyRoll);

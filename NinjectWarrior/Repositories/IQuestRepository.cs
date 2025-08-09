@@ -5,7 +5,7 @@ namespace NinjectWarrior.Repositories
 {
     public interface IQuestRepository
     {
-        Quest GetQuest(string id);
+        Quest? GetQuest(string id);
         IEnumerable<Quest> GetQuests(QuestType type);
     }
 }
