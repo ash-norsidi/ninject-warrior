@@ -15,12 +15,19 @@ namespace NinjectWarrior.Services
                 if (firstQuest != null)
                 {
                     player.CurrentMainQuestId = firstQuest.Id;
-					InitiateQuestSequence(player, firstQuest);
-                    return firstQuest;
                 }
-                return null;
+                else
+                {
+                    return null;
+                }
             }
-            return _questRepository.GetQuest(player.CurrentMainQuestId);
+
+            var quest = _questRepository.GetQuest(player.CurrentMainQuestId);
+            if (quest != null && player.ActiveQuestId != quest.Id && !player.CompletedQuestIds.Contains(quest.Id))
+            {
+                InitiateQuestSequence(player, quest);
+            }
+            return quest;
         }
 
         public IEnumerable<Quest> GetAvailableSubQuests(Player player)
@@ -93,7 +100,7 @@ namespace NinjectWarrior.Services
             if (nextQuest != null && nextQuest.QuestType == QuestType.Main)
             {
                 player.CurrentMainQuestId = nextQuest.Id;
-                InitiateQuestSequence(player, nextQuest);
+                //InitiateQuestSequence(player, nextQuest);
             }
             else
             {
