@@ -8,27 +8,36 @@ namespace NinjectWarrior.Services
         private readonly IQuestRepository _questRepository = questRepository;
 
 		public Quest? GetCurrentMainQuest(Player player)
-        {
-            if (string.IsNullOrEmpty(player.CurrentMainQuestId))
-            {
-                var firstQuest = _questRepository.GetQuests(QuestType.Main).FirstOrDefault();
-                if (firstQuest != null)
-                {
-                    player.CurrentMainQuestId = firstQuest.Id;
-                }
-                else
-                {
-                    return null;
-                }
-            }
+		{
+			if (string.IsNullOrEmpty(player.CurrentMainQuestId))
+			{
+				// This is a new game, start the first quest.
+				var firstQuest = _questRepository.GetQuests(QuestType.Main).FirstOrDefault();
+				if (firstQuest != null)
+				{
+					player.CurrentMainQuestId = firstQuest.Id;
+					// A new quest is now current, so initiate it.
+					InitiateQuestSequence(player, firstQuest);
+					return firstQuest;
+				}
+				return null;
+			}
 
-            var quest = _questRepository.GetQuest(player.CurrentMainQuestId);
-            if (quest != null && player.ActiveQuestId != quest.Id && !player.CompletedQuestIds.Contains(quest.Id))
-            {
-                InitiateQuestSequence(player, quest);
-            }
-            return quest;
-        }
+			var currentQuest = _questRepository.GetQuest(player.CurrentMainQuestId);
+
+			// If the player's active quest is not the current main quest,
+			// it means we have advanced to a new quest and it needs to be initiated.
+			if (currentQuest != null && player.ActiveQuestId != player.CurrentMainQuestId)
+			{
+				// Only initiate if it's not already completed.
+				if (!player.CompletedQuestIds.Contains(currentQuest.Id))
+				{
+					InitiateQuestSequence(player, currentQuest);
+				}
+			}
+
+			return currentQuest;
+		}
 
         public IEnumerable<Quest> GetAvailableSubQuests(Player player)
         {
@@ -99,8 +108,10 @@ namespace NinjectWarrior.Services
 
             if (nextQuest != null && nextQuest.QuestType == QuestType.Main)
             {
+                // Set the ID for the next quest.
+                // The initiation of the quest (puzzle, battle, etc.) will happen
+                // when GetCurrentMainQuest is called on the next request.
                 player.CurrentMainQuestId = nextQuest.Id;
-                //InitiateQuestSequence(player, nextQuest);
             }
             else
             {
