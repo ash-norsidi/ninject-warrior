@@ -1,6 +1,6 @@
 [
   {
-    "Name": "Ember Imp",
+    "Name": "Forest Shade",
     "Health": 40,
     "Level": 3,
     "Strength": 12,
@@ -10,7 +10,7 @@
     "ExperienceAwarded": 20
   },
   {
-    "Name": "Lava Hound",
+    "Name": "Bandit Captain",
     "Health": 55,
     "Level": 4,
     "Strength": 15,
@@ -20,7 +20,7 @@
     "ExperienceAwarded": 30
   },
   {
-    "Name": "Frostback Hatchling",
+    "Name": "Frozen Guardian",
     "Health": 60,
     "Level": 5,
     "Strength": 17,
@@ -30,7 +30,7 @@
     "ExperienceAwarded": 40
   },
   {
-    "Name": "Hollow Shade",
+    "Name": "City Watch Captain",
     "Health": 50,
     "Level": 6,
     "Strength": 16,
@@ -40,7 +40,7 @@
     "ExperienceAwarded": 45
   },
   {
-    "Name": "Cultist Raider",
+    "Name": "Emberbound Wraith",
     "Health": 45,
     "Level": 4,
     "Strength": 13,
