@@ -4,7 +4,7 @@
 
 ## Overview
 
-`ninject-warrior` is a C# project that adapts the original Ninject Warrior design to the ASP.NET Core MVC ecosystem. The project demonstrates core gameplay logic, repositories, and strategy patterns in a modern ASP.NET Core environment—leveraging the built-in dependency injection container rather than Ninject.
+`ninject-warrior` is a C# project that adapts the [original Ninject Warrior](https://github.com/ash-norsidi/fuzzy-ninject-warrior) design to the ASP.NET Core MVC ecosystem. The project demonstrates core gameplay logic, repositories, and strategy patterns in a modern ASP.NET Core environment—leveraging the built-in dependency injection container rather than Ninject.
 
 ## Features
 
